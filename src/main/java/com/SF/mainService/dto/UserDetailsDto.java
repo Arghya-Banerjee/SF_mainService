@@ -3,10 +3,12 @@ package com.SF.mainService.dto;
 public class UserDetailsDto {
     private String username;
     private String passcode;
+    private String userRole;
 
-    public UserDetailsDto(String username, String passcode) {
+    public UserDetailsDto(String username, String passcode, String userRole) {
         this.username = username;
         this.passcode = passcode;
+        this.userRole = userRole;
     }
 
     public String getUsername() {
@@ -25,11 +27,20 @@ public class UserDetailsDto {
         this.passcode = passcode;
     }
 
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
     @Override
     public String toString() {
         return "UserDetailsDto{" +
                 "username='" + username + '\'' +
                 ", passcode='" + passcode + '\'' +
+                ", userRole='" + userRole + '\'' +
                 '}';
     }
 }

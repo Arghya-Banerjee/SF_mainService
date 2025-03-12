@@ -1,25 +1,29 @@
-package com.SF.mainService.model;
+package com.SF.mainService.dto;
 
-import com.SF.mainService.dto.UserDetailsDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class UserPrincipal implements UserDetails {
 
     private final UserDetailsDto user;
+    private final Set<GrantedAuthority> authorities;
 
-    public UserPrincipal(UserDetailsDto user){
+    public UserPrincipal(UserDetailsDto user, List<String> roles) {
         this.user = user;
+        this.authorities = roles.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toSet());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("USER")) ;
+        return authorities;
     }
 
     @Override
